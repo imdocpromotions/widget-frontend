@@ -57,14 +57,14 @@
             gap: 12px;
         }
 
-        /* METALLIC EFFECT: White-to-Black gradient directly on text, Glow stays on shadow */
+        /* METALLIC EFFECT: Direct White-to-Black gradient, Neon Glow preserved */
         .title-text {
-            /* Metallic Gradient: White top, Silver mid, Black bottom */
-            background: linear-gradient(180deg, #ffffff 0%, #aaaaaa 50%, #000000 100%);
+            /* Pure White to Pure Black gradient */
+            background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            /* Keeps the purple neon halo behind the metallic letters */
+            /* Keeps the purple neon halo behind the text */
             text-shadow: 0 0 10px #d3a6ff, 0 0 20px #a970ff;
         }
 
