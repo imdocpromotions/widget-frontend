@@ -57,24 +57,15 @@
             gap: 12px;
         }
 
-        /* METALLIC EFFECT: Base glow + Gradient overlay */
+        /* METALLIC EFFECT: White-to-Black gradient directly on text, Glow stays on shadow */
         .title-text {
-            position: relative;
-            color: #ffffff; /* Base white for the metallic core */
-            text-transform: uppercase;
-            text-shadow: 0 0 2px #ffffff, 0 0 10px #d3a6ff, 0 0 20px #a970ff;
-        }
-
-        .title-text::after {
-            content: attr(data-text);
-            position: absolute;
-            left: 0;
-            top: 0;
-            /* Gradient creates the metallic shine: bright white top to deep black bottom */
-            background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(200,200,200,0.2) 40%, rgba(0,0,0,0.8) 100%);
+            /* Metallic Gradient: White top, Silver mid, Black bottom */
+            background: linear-gradient(180deg, #ffffff 0%, #aaaaaa 50%, #000000 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            z-index: 1;
+            text-transform: uppercase;
+            /* Keeps the purple neon halo behind the metallic letters */
+            text-shadow: 0 0 10px #d3a6ff, 0 0 20px #a970ff;
         }
 
         .crown-glow {
@@ -143,7 +134,7 @@
 
     <div class="widget-container">
         <div class="header-row">
-            <h1><span class="crown-glow">👑</span> <span class="title-text" data-text="OF CHAT">OF CHAT</span></h1>
+            <h1><span class="crown-glow">👑</span> <span class="title-text">OF CHAT</span></h1>
             <div class="live-indicator"></div>
         </div>
         <ul class="chatter-list" id="leaderboard">
