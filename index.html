@@ -23,7 +23,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            /* Heavy shadow on standard text so it survives on stream backgrounds */
             text-shadow: 1px 2px 4px rgba(0, 0, 0, 1);
             overflow: hidden;
         }
@@ -58,14 +57,12 @@
             gap: 6px;
         }
 
-        /* THE VISIBILITY FIX: Bright Neon Purple + Hard White Backlight */
+        /* THE PRISM BUG BYPASS: Solid bright color + multi-layered text shadow */
         .title-text {
-            background: linear-gradient(135deg, #d3a6ff, #a970ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #d3a6ff;
             text-transform: uppercase;
-            /* Double-stacked white glow to force extreme contrast */
-            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 1)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); 
+            /* Layer 1: crisp white core | Layer 2 & 3: wide purple neon glow */
+            text-shadow: 0 0 2px #ffffff, 0 0 12px #d3a6ff, 0 0 22px #a970ff; 
         }
 
         /* ORIGINAL GOLD GLOW preserved */
@@ -113,7 +110,6 @@
             color: var(--text);
         }
 
-        /* Brightened status message for readability */
         .status-msg {
             font-size: 18px;
             font-weight: 600;
