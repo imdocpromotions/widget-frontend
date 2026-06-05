@@ -57,21 +57,21 @@
             gap: 12px;
         }
 
-        /* LAYER 1: Neon Base (White core + Purple halo) */
+        /* METALLIC EFFECT: Base glow + Gradient overlay */
         .title-text {
             position: relative;
-            color: #d3a6ff; 
+            color: #ffffff; /* Base white for the metallic core */
             text-transform: uppercase;
-            text-shadow: 0 0 2px #ffffff, 0 0 12px #d3a6ff, 0 0 22px #a970ff; 
+            text-shadow: 0 0 2px #ffffff, 0 0 10px #d3a6ff, 0 0 20px #a970ff;
         }
 
-        /* LAYER 2: Black gradient overlay (Fades text bottom to black) */
         .title-text::after {
             content: attr(data-text);
             position: absolute;
             left: 0;
             top: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0) 20%, rgba(0,0,0,0.9) 100%);
+            /* Gradient creates the metallic shine: bright white top to deep black bottom */
+            background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(200,200,200,0.2) 40%, rgba(0,0,0,0.8) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             z-index: 1;
