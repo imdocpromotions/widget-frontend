@@ -7,8 +7,8 @@
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <style>
         :root {
-            /* Kept yellow primary for rank colors for contrast */
-            --primary: #ffcc00; 
+            --primary: #ffcc00;
+            --primary-glow: rgba(255, 204, 0, 0.6);
             --bg: rgba(10, 10, 14, 0.75);
             --text: #ffffff;
             --radius: 16px;
@@ -33,7 +33,7 @@
             -webkit-backdrop-filter: blur(12px);
             padding: 22px 32px;
             border-radius: var(--radius);
-            border: 2px solid rgba(255, 255, 255, 0.15); /* Subtler white border */
+            border: 2px solid rgba(255, 204, 0, 0.45);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
             min-width: 260px;
             box-sizing: border-box;
@@ -52,21 +52,23 @@
             font-size: 32px;
             font-weight: 900;
             letter-spacing: 2.5px;
-            
-            /* WHITE GLOW UDPATE - Applies to whole header */
-            filter: drop-shadow(0px 2px 10px rgba(255, 255, 255, 0.8));
-            
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* Gradient remains purple, but parent glow makes it pop with white */
+        /* PURPLE GRADIENT + WHITE GLOW strictly on "Chat" */
         .title-text {
             background: linear-gradient(135deg, #9146ff, #6441a5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); 
+        }
+
+        /* ORIGINAL GOLD GLOW restored strictly to the crown */
+        .crown-glow {
+            filter: drop-shadow(0px 2px 8px var(--primary-glow));
         }
 
         .live-indicator {
@@ -130,7 +132,7 @@
 
     <div class="widget-container">
         <div class="header-row">
-            <h1><span class="title-text">Chat</span>👑</h1>
+            <h1><span class="title-text">Chat</span><span class="crown-glow">👑</span></h1>
             <div class="live-indicator"></div>
         </div>
         <ul class="chatter-list" id="leaderboard">
@@ -142,7 +144,6 @@
         const urlParams = new URLSearchParams(window.location.search);
         const twitchChannel = urlParams.get('twitch') || 'imdoclive'; 
 
-        // YOUR ACTUAL BACKEND URL INCLUDED
         const BACKEND_URL = 'https://widget-backend-y2d1.onrender.com'; 
         
         const socket = io(BACKEND_URL);
