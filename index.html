@@ -58,9 +58,9 @@
             gap: 6px;
         }
 
-        /* EMOJI FIX: Isolates the gradient strictly to the letters */
+        /* EMOJI FIX: Isolates the gradient strictly to the letters (Now Purple) */
         .title-text {
-            background: linear-gradient(135deg, #ffcc00, #ffaa00);
+            background: linear-gradient(135deg, #9146ff, #6441a5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
@@ -127,7 +127,6 @@
 
     <div class="widget-container">
         <div class="header-row">
-            <!-- Separated the text from the emoji so it renders properly -->
             <h1><span class="title-text">Chat</span>👑</h1>
             <div class="live-indicator"></div>
         </div>
@@ -140,7 +139,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const twitchChannel = urlParams.get('twitch') || 'imdoclive'; 
 
-        // REPLACE THIS WITH YOUR RENDER URL
+        // RENDER URL INCLUDED
         const BACKEND_URL = 'https://widget-backend-y2d1.onrender.com'; 
         
         const socket = io(BACKEND_URL);
