@@ -9,7 +9,7 @@
         :root {
             --primary: #ffcc00;
             --primary-glow: rgba(255, 204, 0, 0.6);
-            --bg: rgba(10, 10, 14, 0.75);
+            --bg: rgba(10, 10, 14, 0.85);
             --text: #ffffff;
             --radius: 16px;
         }
@@ -23,7 +23,8 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
+            /* Heavy shadow on standard text so it survives on stream backgrounds */
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 1);
             overflow: hidden;
         }
 
@@ -34,7 +35,7 @@
             padding: 22px 32px;
             border-radius: var(--radius);
             border: 2px solid rgba(255, 204, 0, 0.45);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
             min-width: 260px;
             box-sizing: border-box;
         }
@@ -57,16 +58,17 @@
             gap: 6px;
         }
 
-        /* THE FIX: Brightened neon purple + deep 3D shadow for crisp readability */
+        /* THE VISIBILITY FIX: Bright Neon Purple + Hard White Backlight */
         .title-text {
-            background: linear-gradient(135deg, #c49eff, #9146ff);
+            background: linear-gradient(135deg, #d3a6ff, #a970ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.9)); 
+            /* Double-stacked white glow to force extreme contrast */
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 1)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); 
         }
 
-        /* ORIGINAL GOLD GLOW restored strictly to the crown */
+        /* ORIGINAL GOLD GLOW preserved */
         .crown-glow {
             filter: drop-shadow(0px 2px 8px var(--primary-glow));
         }
@@ -104,23 +106,24 @@
             color: var(--primary);
             margin-right: 10px;
             font-weight: 900;
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
         }
 
         .username {
             color: var(--text);
-            transition: color 0.3s ease;
         }
 
+        /* Brightened status message for readability */
         .status-msg {
             font-size: 18px;
-            font-weight: 500;
-            opacity: 0.75;
+            font-weight: 600;
+            color: #ffffff;
             font-style: italic;
             animation: fadeIn 0.5s ease forwards;
         }
 
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { to { opacity: 0.75; } }
+        @keyframes fadeIn { to { opacity: 1; } }
         @keyframes pulse {
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
             70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 102, 0); }
