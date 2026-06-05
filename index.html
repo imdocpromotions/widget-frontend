@@ -57,17 +57,20 @@
             gap: 12px;
         }
 
-        /* METALLIC EFFECT RESTORED: White-to-Black gradient + 0.5px Thin Outline */
+        /* METALLIC EFFECT: Gradient + Combined Outline & Glow */
         .title-text {
             /* Metallic Gradient: White top to Black bottom */
             background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* Ultra-thin 0.5px white outline */
-            -webkit-text-stroke: 0.5px #ffffff;
             text-transform: uppercase;
-            /* Purple neon halo behind the letters */
-            text-shadow: 0 0 10px #d3a6ff, 0 0 20px #a970ff;
+            /* Combined Text Shadow: 
+               1. Thin White Outline (simulated with shadow layers) 
+               2. Purple Neon Glow
+            */
+            text-shadow: 
+                -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff, 0.5px 0.5px 0 #fff,
+                0 0 10px #d3a6ff, 0 0 20px #a970ff;
         }
 
         .crown-glow {
