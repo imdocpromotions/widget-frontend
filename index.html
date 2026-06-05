@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat👑 | imdocwidgets</title>
+    <title>👑 OF CHAT | imdocwidgets</title>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <style>
         :root {
@@ -54,11 +54,10 @@
             letter-spacing: 2.5px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 12px; /* Increased gap for crown prominence */
         }
 
-        /* THE DUAL-LAYER TRICK */
-        /* Layer 1 (Bottom): Solid base to anchor the massive neon glow */
+        /* DUAL-LAYER TRICK adapted for "OF CHAT" */
         .title-text {
             position: relative;
             color: #d3a6ff; 
@@ -66,22 +65,20 @@
             text-shadow: 0 0 2px #ffffff, 0 0 12px #d3a6ff, 0 0 22px #a970ff; 
         }
 
-        /* Layer 2 (Top): The Purple-to-Black gradient overlay */
         .title-text::after {
             content: attr(data-text);
             position: absolute;
             left: 0;
             top: 0;
-            /* Starts neon purple at the top, fades completely to black at the bottom */
             background: linear-gradient(180deg, #d3a6ff 10%, #000000 85%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             z-index: 1;
         }
 
-        /* ORIGINAL GOLD GLOW preserved */
         .crown-glow {
             filter: drop-shadow(0px 2px 8px var(--primary-glow));
+            font-size: 36px; /* Slightly larger crown to lead */
         }
 
         .live-indicator {
@@ -145,7 +142,7 @@
 
     <div class="widget-container">
         <div class="header-row">
-            <h1><span class="title-text" data-text="Chat">Chat</span><span class="crown-glow">👑</span></h1>
+            <h1><span class="crown-glow">👑</span> <span class="title-text" data-text="OF CHAT">OF CHAT</span></h1>
             <div class="live-indicator"></div>
         </div>
         <ul class="chatter-list" id="leaderboard">
@@ -185,7 +182,7 @@
                 const li = document.createElement('li');
                 li.style.animationDelay = `${index * 0.1}s`;
                 li.innerHTML = `<span class="rank">${index + 1}.</span> <span class="username">${name}</span>`;
-                listElement.appendChild(li);
+                li.appendChild(li);
             });
             
             listElement.dataset.hash = currentHTML;
