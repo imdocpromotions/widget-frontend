@@ -57,20 +57,12 @@
             gap: 12px;
         }
 
-        /* METALLIC EFFECT: Gradient + Combined Outline & Glow */
         .title-text {
-            /* Metallic Gradient: White top to Black bottom */
             background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            /* Combined Text Shadow: 
-               1. Thin White Outline (simulated with shadow layers) 
-               2. Purple Neon Glow
-            */
-            text-shadow: 
-                -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff, 0.5px 0.5px 0 #fff,
-                0 0 10px #d3a6ff, 0 0 20px #a970ff;
+            text-shadow: 0 0 10px #d3a6ff, 0 0 20px #a970ff;
         }
 
         .crown-glow {
@@ -157,36 +149,29 @@
         const listElement = document.getElementById('leaderboard');
 
         socket.on('connect', () => {
+            console.log('Connected to Backend!');
             socket.emit('joinChannel', twitchChannel);
         });
 
         socket.on('updateLeaderboard', (top3) => {
-            if (top3.length === 0) {
-                listElement.innerHTML = `
-                    <li><span class="rank">1.</span> <span class="username">imdoclive</span></li>
-                    <li><span class="rank">2.</span> <span class="username">gemini</span></li>
-                    <li><span class="rank">3.</span> <span class="username">justin123</span></li>
-                `;
-                delete listElement.dataset.hash;
+            console.log('Leaderboard data received:', top3); // DEBUG LOG
+            
+            if (!top3 || top3.length === 0) {
+                listElement.innerHTML = '<li class="status-msg">No chats yet...</li>';
                 return;
             }
-
-            const currentHTML = top3.map(([name]) => name).join('');
-            if (listElement.dataset.hash === currentHTML) return;
 
             listElement.innerHTML = '';
             top3.forEach(([name, count], index) => {
                 const li = document.createElement('li');
                 li.style.animationDelay = `${index * 0.1}s`;
                 li.innerHTML = `<span class="rank">${index + 1}.</span> <span class="username">${name}</span>`;
-                li.appendChild(li);
+                listElement.appendChild(li);
             });
-            
-            listElement.dataset.hash = currentHTML;
         });
 
         socket.on('disconnect', () => {
-            listElement.innerHTML = '<li class="status-msg" style="color:#ff4444;">Connecting...</li>';
+            listElement.innerHTML = '<li class="status-msg" style="color:#ff4444;">Disconnected</li>';
         });
     </script>
 </body>
