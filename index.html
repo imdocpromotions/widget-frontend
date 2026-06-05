@@ -57,14 +57,16 @@
             gap: 12px;
         }
 
-        /* METALLIC EFFECT: Direct White-to-Black gradient, Neon Glow preserved */
+        /* METALLIC EFFECT: White-to-Black gradient + White Border */
         .title-text {
-            /* Pure White to Pure Black gradient */
+            /* Pure White top to Pure Black bottom gradient */
             background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            /* White 1px border */
+            -webkit-text-stroke: 1px #ffffff;
             text-transform: uppercase;
-            /* Keeps the purple neon halo behind the text */
+            /* Purple neon halo behind the letters */
             text-shadow: 0 0 10px #d3a6ff, 0 0 20px #a970ff;
         }
 
@@ -174,7 +176,7 @@
                 const li = document.createElement('li');
                 li.style.animationDelay = `${index * 0.1}s`;
                 li.innerHTML = `<span class="rank">${index + 1}.</span> <span class="username">${name}</span>`;
-                listElement.appendChild(li);
+                li.appendChild(li);
             });
             
             listElement.dataset.hash = currentHTML;
