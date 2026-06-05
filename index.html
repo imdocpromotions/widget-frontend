@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat👑 | imdocwidgets</title>
-    <!-- Socket.io connection to backend -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <style>
         :root {
@@ -45,21 +44,28 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 18px;
+            width: 100%;
         }
 
         h1 {
             margin: 0;
             font-size: 32px;
             font-weight: 900;
+            letter-spacing: 2.5px;
+            filter: drop-shadow(0px 2px 8px var(--primary-glow));
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* EMOJI FIX: Isolates the gradient strictly to the letters */
+        .title-text {
             background: linear-gradient(135deg, #ffcc00, #ffaa00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            filter: drop-shadow(0px 2px 8px var(--primary-glow));
         }
 
-        /* Pulsing live dot to encourage chat activity */
         .live-indicator {
             width: 10px;
             height: 10px;
@@ -108,17 +114,8 @@
             animation: fadeIn 0.5s ease forwards;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 0.75; }
-        }
-
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 0.75; } }
         @keyframes pulse {
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
             70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 102, 0); }
@@ -130,7 +127,8 @@
 
     <div class="widget-container">
         <div class="header-row">
-            <h1>Chat👑</h1>
+            <!-- Separated the text from the emoji so it renders properly -->
+            <h1><span class="title-text">Chat</span>👑</h1>
             <div class="live-indicator"></div>
         </div>
         <ul class="chatter-list" id="leaderboard">
@@ -139,23 +137,20 @@
     </div>
 
     <script>
-        // 1. GET CHANNEL NAME FROM URL PARAMETER (?twitch=channelname)
         const urlParams = new URLSearchParams(window.location.search);
         const twitchChannel = urlParams.get('twitch') || 'imdoclive'; 
 
-        // 2. CONNECT TO BACKEND SERVER (Replace with your live Render URL from Step 2)
-        const BACKEND_URL = 'https://your-backend-app.onrender.com'; 
+        // REPLACE THIS WITH YOUR RENDER URL
+        const BACKEND_URL = 'https://widget-backend-y2d1.onrender.com'; 
+        
         const socket = io(BACKEND_URL);
-
         const listElement = document.getElementById('leaderboard');
 
         socket.on('connect', () => {
             socket.emit('joinChannel', twitchChannel);
         });
 
-        // 3. LISTEN FOR LIVE BROADCAST UPDATES
         socket.on('updateLeaderboard', (top3) => {
-            // Default placeholder layout if nobody has sent a message yet
             if (top3.length === 0) {
                 listElement.innerHTML = `
                     <li><span class="rank">1.</span> <span class="username">imdoclive</span></li>
@@ -166,15 +161,12 @@
                 return;
             }
 
-            // Create unique check tag to prevent layout flickering on simple message counts
             const currentHTML = top3.map(([name]) => name).join('');
             if (listElement.dataset.hash === currentHTML) return;
 
-            // Clear layout and build the clean top 3 text list
             listElement.innerHTML = '';
             top3.forEach(([name, count], index) => {
                 const li = document.createElement('li');
-                // Deliberate stayout cascade animation delays per row
                 li.style.animationDelay = `${index * 0.1}s`;
                 li.innerHTML = `<span class="rank">${index + 1}.</span> <span class="username">${name}</span>`;
                 listElement.appendChild(li);
