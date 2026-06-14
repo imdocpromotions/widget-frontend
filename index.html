@@ -22,7 +22,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center; /* CENTERS THE ENTIRE WIDGET ON SCREEN */
             text-shadow: 1px 2px 4px rgba(0, 0, 0, 1);
             overflow: hidden;
         }
@@ -37,14 +37,18 @@
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
             min-width: 260px;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* CENTERS CONTENT INSIDE THE WIDGET */
         }
 
         .header-row {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; /* CENTERS THE TITLE */
             margin-bottom: 18px;
             width: 100%;
+            position: relative; /* KEEPS THE GREEN DOT ANCHORED RIGHT */
         }
 
         h1 {
@@ -93,6 +97,8 @@
             border-radius: 50%;
             box-shadow: 0 0 10px #00ff66;
             animation: pulse 1.8s infinite ease-in-out;
+            position: absolute; /* LOCKS DOT TO THE RIGHT EDGE */
+            right: 0;
         }
 
         .chatter-list {
@@ -103,6 +109,7 @@
             font-weight: 700;
             display: flex;
             flex-direction: column;
+            align-items: center; /* CENTERS THE LEADERBOARD NAMES */
             gap: 14px;
             letter-spacing: 0.5px;
         }
@@ -176,7 +183,6 @@
         });
 
         socket.on('updateLeaderboard', (top3) => {
-            console.log('Leaderboard data received:', top3); // DEBUG LOG
             
             if (!top3 || top3.length === 0) {
                 listElement.innerHTML = '<li class="status-msg">No chats yet...</li>';
