@@ -22,7 +22,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center; /* CENTERS THE ENTIRE WIDGET ON SCREEN */
+            align-items: center; 
             text-shadow: 1px 2px 4px rgba(0, 0, 0, 1);
             overflow: hidden;
         }
@@ -39,16 +39,16 @@
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            align-items: center; /* CENTERS CONTENT INSIDE THE WIDGET */
+            align-items: center; 
         }
 
         .header-row {
             display: flex;
             align-items: center;
-            justify-content: center; /* CENTERS THE TITLE */
-            margin-bottom: 18px;
+            justify-content: center; 
+            margin-bottom: 24px; /* Given a slight bump so it doesn't touch rank 1 */
             width: 100%;
-            position: relative; /* KEEPS THE GREEN DOT ANCHORED RIGHT */
+            position: relative; 
         }
 
         h1 {
@@ -59,12 +59,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .title-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
         }
 
         .title-text {
@@ -78,11 +72,14 @@
         .subtitle {
             position: absolute;
             top: 100%;
+            left: 50%; /* Locks it to the absolute mathematical center */
+            transform: translateX(-50%);
             font-size: 11px;
             font-weight: 800;
             color: rgba(255, 255, 255, 0.7);
             letter-spacing: 2px;
             text-transform: uppercase;
+            margin-top: 4px;
         }
 
         .crown-glow {
@@ -97,7 +94,7 @@
             border-radius: 50%;
             box-shadow: 0 0 10px #00ff66;
             animation: pulse 1.8s infinite ease-in-out;
-            position: absolute; /* LOCKS DOT TO THE RIGHT EDGE */
+            position: absolute; 
             right: 0;
         }
 
@@ -109,7 +106,7 @@
             font-weight: 700;
             display: flex;
             flex-direction: column;
-            align-items: center; /* CENTERS THE LEADERBOARD NAMES */
+            align-items: center; 
             gap: 14px;
             letter-spacing: 0.5px;
         }
@@ -156,11 +153,9 @@
         <div class="header-row">
             <h1>
                 <span class="crown-glow">👑</span> 
-                <span class="title-wrapper">
-                    <span class="title-text">OF CHAT</span>
-                    <span class="subtitle">(WEEKLY)</span>
-                </span>
+                <span class="title-text">OF CHAT</span>
             </h1>
+            <div class="subtitle">(WEEKLY)</div>
             <div class="live-indicator"></div>
         </div>
         <ul class="chatter-list" id="leaderboard">
