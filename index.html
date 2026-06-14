@@ -22,7 +22,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: flex-end; /* FIXED: Puts the widget back on the right side */
             text-shadow: 1px 2px 4px rgba(0, 0, 0, 1);
             overflow: hidden;
         }
@@ -47,28 +47,16 @@
             width: 100%;
         }
 
-        .title-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 32px;
-            font-weight: 900;
-            letter-spacing: 2.5px;
+        .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .title-text {
-            background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px #d3a6ff, 0 0 20px #a970ff;
+        .text-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers WEEKLY exactly under OF CHAT */
         }
 
         .crown-glow {
@@ -76,13 +64,23 @@
             font-size: 36px;
         }
 
-        .subtitle {
-            font-size: 13px;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 4px;
-            letter-spacing: 1.5px;
+        .title-text {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            background: linear-gradient(180deg, #ffffff 0%, #000000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+            text-shadow: 0 0 10px #d3a6ff, 0 0 20px #a970ff;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            margin-top: 2px;
         }
 
         .live-indicator {
@@ -146,9 +144,12 @@
 
     <div class="widget-container">
         <div class="header-row">
-            <div class="title-container">
-                <h1><span class="crown-glow">👑</span> <span class="title-text">OF CHAT</span></h1>
-                <div class="subtitle">(Weekly)</div>
+            <div class="header-left">
+                <span class="crown-glow">👑</span>
+                <div class="text-stack">
+                    <span class="title-text">OF CHAT</span>
+                    <span class="subtitle">(WEEKLY)</span>
+                </div>
             </div>
             <div class="live-indicator"></div>
         </div>
@@ -172,8 +173,6 @@
         });
 
         socket.on('updateLeaderboard', (top3) => {
-            console.log('Leaderboard data received:', top3); 
-            
             if (!top3 || top3.length === 0) {
                 listElement.innerHTML = '<li class="status-msg">No chats yet...</li>';
                 return;
