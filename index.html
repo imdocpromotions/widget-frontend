@@ -35,7 +35,7 @@
             border-radius: var(--radius);
             border: 2px solid rgba(255, 204, 0, 0.45);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
-            min-width: 260px;
+            width: 320px; /* Fixed width prevents the overlay from resizing dynamically */
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -46,7 +46,7 @@
             display: flex;
             align-items: center;
             justify-content: center; 
-            margin-bottom: 24px; /* Given a slight bump so it doesn't touch rank 1 */
+            margin-bottom: 24px; 
             width: 100%;
             position: relative; 
         }
@@ -59,6 +59,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            padding-right: 16px; /* Safety buffer prevents absolute items from clipping text */
         }
 
         .title-text {
@@ -72,7 +73,7 @@
         .subtitle {
             position: absolute;
             top: 100%;
-            left: 50%; /* Locks it to the absolute mathematical center */
+            left: 50%; 
             transform: translateX(-50%);
             font-size: 11px;
             font-weight: 800;
@@ -109,14 +110,18 @@
             align-items: center; 
             gap: 14px;
             letter-spacing: 0.5px;
+            width: 100%;
         }
 
         .chatter-list li {
             display: flex;
             align-items: center;
+            justify-content: center;
             opacity: 0;
             transform: translateY(10px);
             animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .rank {
@@ -124,10 +129,16 @@
             margin-right: 10px;
             font-weight: 900;
             text-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
+            flex-shrink: 0;
         }
 
         .username {
             color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Safely truncates long names with a clean ... */
+            max-width: 180px; /* Keeps long names tightly bounded within the fixed box */
+            display: inline-block;
         }
 
         .status-msg {
